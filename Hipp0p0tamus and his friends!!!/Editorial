@@ -1,0 +1,37 @@
+
+If you have read the problem, you already have found out that, the problem is:  Hipp0p0tamus will give you N-1 roads between N houses and their costs. You have to just find out the total cost for each friend to visit all others houses and the maximum cost among all the costs. And there is only one way to go from one house to another,that indicates, this problem is actually a Tree Data Structure's problem.
+
+Approach: DFS (Preorder and Postorder traversal).
+
+Solution: You know, how to find out total cost of all nodes from a certain node in complexity O(number of nodes). But what is the for all N nodes? You can't run DFS for all N nodes by using loop cause if you do that the complexity becomes O(n^2) and the constraint is enough to get TLE for O(n^2) solution.
+
+So What to do?
+
+We can solve the problem using postoder and preorder traversal of DFS easily. But at first you need to observe a important thing:
+
+   1. When we move our root from one node to its connected node, one part of nodes get closer, the other parts get further.  
+
+So if we know the number of nodes in both parts, we can solve the problem. And we also should get all enough informations of the tree with a single traversal.
+
+Now let's solve: 
+
+1. Initial an array Sub[] to count the number of nodes in a particular subtree.
+2. Initial ar array res[] to store the total cost of a particular subtree.
+
+At first we need to do postorder traversal using DFS and when we will do the traversal we will update Sub[] and res[].
+
+Update while doing postorder traversal:
+	DFS(child);	
+	Sub[root]+=Sub[child];
+	res[root]+=(res[child]+Sub[child]*COST_OF_THAT_EDGE);
+
+Now, we know the total cost of node 1.
+
+After that we need to do the preorder traversal to find out total cost of all N nodes.
+
+I have already said, when we move our root from one node to its connected node, one part of nodes get closer and other parts get further. So, we can now update each node's total cost/ res[i] by doing preorder like this:
+
+	res[child]=res[root]-(Sub[child]*COST_OF_THAT_EDGE) + (N-Sub[child])*COST_OF_THAT_EDGE;
+	DFS(child); 
+
+Now, we know all node's total cost. Now just find out the maximum cost among them and then print all costs and the maximum cost.
