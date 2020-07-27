@@ -7,7 +7,7 @@ Solution: You know, how to find out total cost of all nodes from a certain node 
 
 So What to do?
 
-We can solve the problem using postoder and preorder traversal of DFS easily. But at first you need to observe a important thing:
+We can solve the problem using postorder and preorder traversal of DFS easily. But at first you need to observe a important thing:
 
    1. When we move our root from one node to its connected node, one part of nodes get closer, the other parts get further.  
 
